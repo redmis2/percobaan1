@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPMB Online 2026/2027 - SD Al-Qur'an An-Najaah Kupang</title>
+    <title>SPMB Online 2026/2027 - SD Al-Qur'an An-Najaah Wahdah Islamiyah Kupang</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN -->
@@ -20,7 +20,7 @@
         <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3 text-center md:text-left">
                 <div class="w-12 h-12 bg-white text-emerald-700 rounded-full flex items-center justify-center font-bold text-xl shadow">
-                    <i class="fa-solid font-bold fa-book-quran"></i>
+                    <i class="fa-solid fa-book-quran"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-lg md:text-xl leading-tight">SD AL-QUR'AN AN-NAJAAH KUPANG</h1>
@@ -28,8 +28,9 @@
                 </div>
             </div>
             <div class="text-xs bg-emerald-800 px-3 py-2 rounded-lg text-emerald-100 flex flex-col gap-1 border border-emerald-600">
-                <span class="font-semibold text-white"><i class="fa-solid fa-headset mr-1">="</i> Layanan Informasi:</span>
-                <span>Fachry: <a href="https://wa.me/6282235108330" target="_blank" class="underline hover:text-white">082235108330</a> | Ustzh. Failah: <a href="https://wa.me/6282261420387" target="_blank" class="underline hover:text-white">082261420387</a></span>
+                <span class="font-semibold text-white"><i class="fa-solid fa-headset mr-1"></i> Layanan Informasi:</span>
+                <span>Kendala Formulir: <a href="https://wa.me/6282235108330" target="_blank" class="underline hover:text-white">082235108330</a> (Fachry)</span>
+                <span>Biaya Pendaftaran: <a href="https://wa.me/6282261420387" target="_blank" class="underline hover:text-white">082261420387</a> (Utzh. Failah)</span>
             </div>
         </div>
     </header>
@@ -37,8 +38,31 @@
     <!-- Main Container -->
     <main class="max-w-4xl mx-auto w-full p-4 my-6 flex-grow">
         
-        <!-- Form Wrapper -->
-        <div id="form-container" class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+        <!-- Welcome Banner / Kata Sambutan -->
+        <div id="welcome-banner" class="bg-white rounded-2xl shadow-md border border-slate-100 p-6 md:p-8 mb-6 space-y-4">
+            <h2 class="text-xl font-bold text-emerald-800 flex items-center gap-2">
+                <i class="fa-solid fa-hands-praying"></i> Selamat Datang Calon Wali Murid
+            </h2>
+            <div class="text-sm text-slate-600 space-y-3 leading-relaxed whitespace-pre-line bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">Assalamu’alaikum warahmatullahi wabarakatuh.
+
+Segala puji bagi Allah SWT yang telah memberikan kita nikmat iman, kesehatan, dan kesempatan.
+
+Dengan ini, SD Al-Qur'an An-Najaah Wahdah Islamiyah Kupang membuka Pendaftaran Peserta Didik Baru Tahun Ajaran 2026/2027.
+
+Formulir ini diperuntukkan bagi calon peserta didik yang ingin bergabung dalam pendidikan berbasis Al-Qur’an dan akhlak Islami.
+
+Kepada Bapak/Ibu yang ingin mendaftarkan Putra/Putrinya dimohon untuk mengisi seluruh data dengan benar dan lengkap dan juga meluangkan waktu yang cukup untuk pengisian formulir ini serta menyiapkan beberapa file yang dibutuhkan diantaranya fotocopy Akta Kelahiran Peserta Didik, Kartu Keluarga, Ijazah/Surat Keterangan Lulus dari TK/Sekolah asal, Pas Foto(2x3) terbaru Peserta Didik serta siap membayar Biaya Pendaftaran.
+
+catatan :
+*untuk kendala dalam pengisian formulir bisa menghubungi 082235108330 (Fachry)
+*untuk menanyakan terkait Biaya Pendaftaran bisa menghubungi 082261420387 (Utzh. Failah)</div>
+            <button type="button" id="startFormBtn" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-pen"></i> Mulai Mengisi Formulir Pendaftaran
+            </button>
+        </div>
+
+        <!-- Form Wrapper (Hidden until start clicked) -->
+        <div id="form-container" class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden hidden">
             
             <!-- Stepper Progress Bar -->
             <div class="bg-slate-100 p-4 md:p-6 border-b border-slate-200">
@@ -47,25 +71,25 @@
                     <div id="progress-line" class="absolute top-1/2 left-0 h-1 bg-emerald-600 -translate-y-1/2 z-0 transition-all duration-300" style="width: 0%;"></div>
 
                     <!-- Step 1 Indicator -->
-                    <div class="step-indicator z-10 flex flex-col items-center" data-step="1">
+                    <div class="step-indicator z-10 flex flex-col items-center cursor-pointer" data-step="1">
                         <div class="step-circle w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold shadow transition-all duration-300">1</div>
                         <span class="text-xs font-semibold mt-2 text-emerald-700">Data Siswa</span>
                     </div>
 
                     <!-- Step 2 Indicator -->
-                    <div class="step-indicator z-10 flex flex-col items-center" data-step="2">
+                    <div class="step-indicator z-10 flex flex-col items-center cursor-pointer" data-step="2">
                         <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">2</div>
                         <span class="text-xs font-semibold mt-2 text-slate-500">Orang Tua / Wali</span>
                     </div>
 
                     <!-- Step 3 Indicator -->
-                    <div class="step-indicator z-10 flex flex-col items-center" data-step="3">
+                    <div class="step-indicator z-10 flex flex-col items-center cursor-pointer" data-step="3">
                         <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">3</div>
                         <span class="text-xs font-semibold mt-2 text-slate-500">Pendidikan & Kesehatan</span>
                     </div>
 
                     <!-- Step 4 Indicator -->
-                    <div class="step-indicator z-10 flex flex-col items-center" data-step="4">
+                    <div class="step-indicator z-10 flex flex-col items-center cursor-pointer" data-step="4">
                         <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">4</div>
                         <span class="text-xs font-semibold mt-2 text-slate-500">Dokumen</span>
                     </div>
@@ -123,29 +147,99 @@
                         <div>
                             <label class="block text-sm font-semibold mb-1">Hobi</label>
                             <select id="Hobi_Select" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
-                                <option value="Membaca">Membaca</option>
-                                <option value="Olahraga">Olahraga</option>
-                                <option value="Menggambar">Menggambar</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="belanja">Belanja</option>
+                                <option value="berkemah">Berkemah</option>
+                                <option value="berlari">Berlari</option>
+                                <option value="bermain biola">Bermain Biola</option>
+                                <option value="bermain bola">Bermain Bola</option>
+                                <option value="bermain bola tenis">Bermain Bola Tenis</option>
+                                <option value="bermain boneka">Bermain Boneka</option>
+                                <option value="bermain bulu tangkis">Bermain Bulu Tangkis</option>
+                                <option value="bermain gitar">Bermain Gitar</option>
+                                <option value="bermain musik">Bermain Musik</option>
+                                <option value="bermain piano">Bermain Piano</option>
+                                <option value="berselancar">Berselancar</option>
+                                <option value="fitness">Fitness</option>
+                                <option value="fotografi">Fotografi</option>
+                                <option value="jogging">Jogging</option>
+                                <option value="kesenian">Kesenian</option>
+                                <option value="main puzzle">Main Puzzle</option>
+                                <option value="makan">Makan</option>
+                                <option value="memancing">Memancing</option>
+                                <option value="membaca" selected>Membaca</option>
+                                <option value="mendaki">Mendaki</option>
+                                <option value="menggambar">Menggambar</option>
+                                <option value="menjahit">Menjahit</option>
+                                <option value="menulis">Menulis</option>
+                                <option value="mewarnai">Mewarnai</option>
+                                <option value="olahraga">Olahraga</option>
+                                <option value="traveling">Traveling</option>
+                                <option value="lainnya">Lainnya</option>
                             </select>
-                            <input type="text" id="Hobi_Lainnya" placeholder="Sebutkan Hobi" class="w-full p-2.5 border rounded-lg mt-2 hidden">
+                            <input type="text" id="Hobi_Lainnya" placeholder="Sebutkan Hobi Lainnya" class="w-full p-2.5 border rounded-lg mt-2 hidden">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold mb-1">Cita-Cita</label>
                             <select id="Cita_Select" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
-                                <option value="Dokter">Dokter</option>
-                                <option value="Guru/Ustadz">Guru / Ustadz</option>
-                                <option value="TNI/Polri">TNI / Polri</option>
-                                <option value="Pengusaha">Pengusaha</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="arsitek">Arsitek</option>
+                                <option value="astronot">Astronot</option>
+                                <option value="atlet">Atlet</option>
+                                <option value="atlet esport profesional">Atlet Esport Profesional</option>
+                                <option value="atlit olahraga">Atlit Olahraga</option>
+                                <option value="bidan">Bidan</option>
+                                <option value="content Creator">Content Creator</option>
+                                <option value="da'i / da'iyah">Da'i / Da'iyah</option>
+                                <option value="designer">Designer</option>
+                                <option value="dokter" selected>Dokter</option>
+                                <option value="guru / dosen">Guru / Dosen</option>
+                                <option value="ustaz / usatazah">Ustaz / Usatazah</option>
+                                <option value="koki">Koki</option>
+                                <option value="masinis kereta api">Masinis Kereta Api</option>
+                                <option value="pns">PNS</option>
+                                <option value="pelaut">Pelaut</option>
+                                <option value="pemadam kebakaran">Pemadam Kebakaran</option>
+                                <option value="pembalap">Pembalap</option>
+                                <option value="pembawa acara / mc">Pembawa Acara / MC</option>
+                                <option value="pengacara">Pengacara</option>
+                                <option value="penghafal al-qur'an">Penghafal Al-Qur'an</option>
+                                <option value="pengusaha">Pengusaha</option>
+                                <option value="penulis">Penulis</option>
+                                <option value="penyiar radio">Penyiar Radio</option>
+                                <option value="perawat/suster">Perawat/Suster</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="polisi">Polisi</option>
+                                <option value="politikus">Politikus</option>
+                                <option value="presiden">Presiden</option>
+                                <option value="seni/lukis/artis/sejenis">Seni/Lukis/Artis/Sejenis</option>
+                                <option value="tni">TNI</option>
+                                <option value="translator">Translator</option>
+                                <option value="vlogger">Vlogger</option>
+                                <option value="wartawan">Wartawan</option>
+                                <option value="wiraswasta">Wiraswasta</option>
+                                <option value="lainnya">Lainnya</option>
                             </select>
-                            <input type="text" id="Cita_Lainnya" placeholder="Sebutkan Cita-cita" class="w-full p-2.5 border rounded-lg mt-2 hidden">
+                            <input type="text" id="Cita_Lainnya" placeholder="Sebutkan Cita-cita Lainnya" class="w-full p-2.5 border rounded-lg mt-2 hidden">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold mb-1">Berkebutuhan Khusus? <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold mb-1">Berkebutuhan Khusus <span class="text-red-500">*</span></label>
                             <select id="Berkebutuhan_Khusus" name="Berkebutuhan_Khusus" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
                                 <option value="Tidak">Tidak</option>
-                                <option value="Ya">Ya</option>
+                                <option value="netra">Netra</option>
+                                <option value="rungu">Rungu</option>
+                                <option value="grahita ringan">Grahita Ringan</option>
+                                <option value="grahita sedang">Grahita Sedang</option>
+                                <option value="daksa ringan">Daksa Ringan</option>
+                                <option value="daksa Sedang">Daksa Sedang</option>
+                                <option value="laras">Laras</option>
+                                <option value="wicara">Wicara</option>
+                                <option value="hyperaktif">Hyperaktif</option>
+                                <option value="cerdas istimewa">Cerdas Istimewa</option>
+                                <option value="bakat istimewa">Bakat Istimewa</option>
+                                <option value="kesulitan belajar">Kesulitan Belajar</option>
+                                <option value="narkoba">Narkoba</option>
+                                <option value="indigo">Indigo</option>
+                                <option value="down syndrome">Down Syndrome</option>
+                                <option value="autis">Autis</option>
                             </select>
                         </div>
                     </div>
@@ -176,35 +270,56 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold mb-1">Jarak (KM) <span class="text-red-500">*</span></label>
-                            <input type="number" step="0.1" id="Jarak_KM" name="Jarak_KM" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                            <label class="block text-sm font-semibold mb-1">Jarak Rumah ke Sekolah <span class="text-red-500">*</span></label>
+                            <div class="flex gap-2">
+                                <input type="number" step="0.1" id="Jarak_KM" name="Jarak_KM" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                                <select id="Satuan_Jarak" class="p-2.5 border rounded-lg bg-slate-50 text-xs font-semibold">
+                                    <option value="KM">KM</option>
+                                    <option value="M">M</option>
+                                </select>
+                            </div>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold mb-1">Waktu Tempuh (Menit) <span class="text-red-500">*</span></label>
-                            <input type="number" id="Waktu_Tempuh_Menit" name="Waktu_Tempuh_Menit" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                            <label class="block text-sm font-semibold mb-1">Waktu Tempuh ke Sekolah <span class="text-red-500">*</span></label>
+                            <div class="flex gap-2">
+                                <input type="number" id="Waktu_Tempuh_Menit" name="Waktu_Tempuh_Menit" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                                <span class="p-2.5 bg-slate-100 border rounded-lg text-xs font-semibold flex items-center">Menit</span>
+                            </div>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold mb-1">Tempat Tinggal <span class="text-red-500">*</span></label>
                             <select id="Tempat_Tinggal" name="Tempat_Tinggal" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
-                                <option value="Bersama Orang Tua">Bersama Orang Tua</option>
-                                <option value="Wali">Wali</option>
-                                <option value="Kos/Kontrak">Kos/Kontrak</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="bersama orang tua">Bersama Orang Tua</option>
+                                <option value="wali">Wali</option>
+                                <option value="kost">Kost</option>
+                                <option value="asrama">Asrama</option>
+                                <option value="panti asuhan">Panti Asuhan</option>
+                                <option value="pesantren">Pesantren</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold mb-1">Transportasi <span class="text-red-500">*</span></label>
-                            <input type="text" id="Transportasi" name="Transportasi" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Sepeda Motor / Jalan Feet" required>
+                            <select id="Transportasi" name="Transportasi" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                                <option value="jalan kaki">Jalan Kaki</option>
+                                <option value="motor">Motor</option>
+                                <option value="sepeda">Sepeda</option>
+                                <option value="mobil pribadi">Mobil Pribadi</option>
+                                <option value="ojek">Ojek</option>
+                                <option value="angkutan umum / bus">Angkutan Umum / Bus</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-semibold mb-1">Anak Ke- <span class="text-red-500">*</span></label>
+                            <label class="block text-sm font-semibold mb-1">Anak Ke Berapa (Berdasarkan KK) <span class="text-red-500">*</span></label>
                             <input type="number" id="Anak_Ke" name="Anak_Ke" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold mb-1">Jumlah Kandung <span class="text-red-500">*</span></label>
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <label class="block text-sm font-semibold">Jumlah Saudara Kandung <span class="text-red-500">*</span></label>
+                                <i id="info-saudara" class="fa-solid fa-circle-question text-emerald-600 cursor-pointer hover:text-emerald-700" title="Klik untuk info"></i>
+                            </div>
                             <input type="number" id="Jumlah_Saudara" name="Jumlah_Saudara" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
                         </div>
                     </div>
@@ -238,27 +353,66 @@
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pendidikan</label>
                                 <select id="Ayah_Pendidikan" name="Ayah_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
+                                    <option value="tidak sekolah">Tidak Sekolah</option>
+                                    <option value="paud">PAUD</option>
+                                    <option value="tk/sederajat">TK/Sederajat</option>
+                                    <option value="sd/sederajat">SD/Sederajat</option>
+                                    <option value="smp/sederajat">SMP/Sederajat</option>
+                                    <option value="sma/sederajat" selected>SMA/Sederajat</option>
+                                    <option value="putus sd">Putus SD</option>
+                                    <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option>
+                                    <option value="S1">S1</option><option value="S2">S2</option><option value="S2 terapan">S2 Terapan</option>
+                                    <option value="S3">S3</option><option value="S3 terapan">S3 Terapan</option>
+                                    <option value="paket a">Paket A</option><option value="paket b">Paket B</option><option value="paket c">Paket C</option>
+                                    <option value="informal">Informal</option><option value="non formal">Non Formal</option><option value="profesi">Profesi</option>
+                                    <option value="Sp-1">Sp-1</option><option value="Sp-2">Sp-2</option><option value="lainnya">Lainnya</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pekerjaan</label>
-                                <input type="text" id="Ayah_Pekerjaan" name="Ayah_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white" required>
+                                <select id="Ayah_Pekerjaan" name="Ayah_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="tidak bekerja">Tidak Bekerja</option>
+                                    <option value="nelayan">Nelayan</option>
+                                    <option value="petani">Petani</option>
+                                    <option value="peternak">Peternak</option>
+                                    <option value="pns/tni/polri">PNS/TNI/Polri</option>
+                                    <option value="karyawan swasta" selected>Karyawan Swasta</option>
+                                    <option value="pedagang kecil">Pedagang Kecil</option>
+                                    <option value="pedagang besar">Pedagang Besar</option>
+                                    <option value="wiraswasta">Wiraswasta</option>
+                                    <option value="wirausaha">Wirausaha</option>
+                                    <option value="buruh">Buruh</option>
+                                    <option value="pensiunan">Pensiunan</option>
+                                    <option value="tenaga kerja indonesia">Tenaga Kerja Indonesia</option>
+                                    <option value="karyawan bumn">Karyawan BUMN</option>
+                                    <option value="sudah meninggal">Sudah Meninggal</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Penghasilan Bulanan</label>
                                 <select id="Ayah_Penghasilan" name="Ayah_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
-                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
-                                    <option value="3 - 5 Juta">Rp 3.000.000 - Rp 5.000.000</option>
-                                    <option value="> 5 Juta">&gt; Rp 5.000.000</option>
+                                    <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                                    <option value="Rp. 500.000 - Rp. 999.999">Rp. 500.000 - Rp. 999.999</option>
+                                    <option value="Rp. 1.000.000 - Rp. 1.999.999">Rp. 1.000.000 - Rp. 1.999.999</option>
+                                    <option value="Rp. 2.000.000 - Rp. 4.999.999" selected>Rp. 2.000.000 - Rp. 4.999.999</option>
+                                    <option value="Rp.5.000.000 - Rp. 20.000.000">Rp. 5.000.000 - Rp. 20.000.000</option>
+                                    <option value="Lebih dari Rp. 20.000.000">Lebih dari Rp. 20.000.000</option>
+                                    <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
-                                <input type="text" id="Ayah_KebutuhanKhusus" name="Ayah_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus Ayah</label>
+                                <select id="Ayah_KebutuhanKhusus" name="Ayah_KebutuhanKhusus" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="Tidak" selected>Tidak</option>
+                                    <option value="netra">Netra</option><option value="rungu">Rungu</option><option value="grahita ringan">Grahita Ringan</option>
+                                    <option value="grahita sedang">Grahita Sedang</option><option value="daksa ringan">Daksa Ringan</option><option value="daksa Sedang">Daksa Sedang</option>
+                                    <option value="laras">Laras</option><option value="wicara">Wicara</option><option value="hyperaktif">Hyperaktif</option>
+                                    <option value="cerdas istimewa">Cerdas Istimewa</option><option value="bakat istimewa">Bakat Istimewa</option><option value="kesulitan belajar">Kesulitan Belajar</option>
+                                    <option value="narkoba">Narkoba</option><option value="indigo">Indigo</option><option value="down syndrome">Down Syndrome</option><option value="autis">Autis</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -288,27 +442,66 @@
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pendidikan</label>
                                 <select id="Ibu_Pendidikan" name="Ibu_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
+                                    <option value="tidak sekolah">Tidak Sekolah</option>
+                                    <option value="paud">PAUD</option>
+                                    <option value="tk/sederajat">TK/Sederajat</option>
+                                    <option value="sd/sederajat">SD/Sederajat</option>
+                                    <option value="smp/sederajat">SMP/Sederajat</option>
+                                    <option value="sma/sederajat" selected>SMA/Sederajat</option>
+                                    <option value="putus sd">Putus SD</option>
+                                    <option value="D1">D1</option><option value="D2">D2</option><option value="D3">D3</option><option value="D4">D4</option>
+                                    <option value="S1">S1</option><option value="S2">S2</option><option value="S2 terapan">S2 Terapan</option>
+                                    <option value="S3">S3</option><option value="S3 terapan">S3 Terapan</option>
+                                    <option value="paket a">Paket A</option><option value="paket b">Paket B</option><option value="paket c">Paket C</option>
+                                    <option value="informal">Informal</option><option value="non formal">Non Formal</option><option value="profesi">Profesi</option>
+                                    <option value="Sp-1">Sp-1</option><option value="Sp-2">Sp-2</option><option value="lainnya">Lainnya</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pekerjaan</label>
-                                <input type="text" id="Ibu_Pekerjaan" name="Ibu_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white" required>
+                                <select id="Ibu_Pekerjaan" name="Ibu_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="tidak bekerja" selected>Tidak Bekerja / Ibu Rumah Tangga</option>
+                                    <option value="nelayan">Nelayan</option>
+                                    <option value="petani">Petani</option>
+                                    <option value="peternak">Peternak</option>
+                                    <option value="pns/tni/polri">PNS/TNI/Polri</option>
+                                    <option value="karyawan swasta">Karyawan Swasta</option>
+                                    <option value="pedagang kecil">Pedagang Kecil</option>
+                                    <option value="pedagang besar">Pedagang Besar</option>
+                                    <option value="wiraswasta">Wiraswasta</option>
+                                    <option value="wirausaha">Wirausaha</option>
+                                    <option value="buruh">Buruh</option>
+                                    <option value="pensiunan">Pensiunan</option>
+                                    <option value="tenaga kerja indonesia">Tenaga Kerja Indonesia</option>
+                                    <option value="karyawan bumn">Karyawan BUMN</option>
+                                    <option value="sudah meninggal">Sudah Meninggal</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Penghasilan Bulanan</label>
                                 <select id="Ibu_Penghasilan" name="Ibu_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="Tidak Berpenghasilan">Tidak Berpenghasilan / Ibu Rumah Tangga</option>
-                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
-                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
-                                    <option value="> 3 Juta">&gt; Rp 3.000.000</option>
+                                    <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                                    <option value="Rp. 500.000 - Rp. 999.999">Rp. 500.000 - Rp. 999.999</option>
+                                    <option value="Rp. 1.000.000 - Rp. 1.999.999">Rp. 1.000.000 - Rp. 1.999.999</option>
+                                    <option value="Rp. 2.000.000 - Rp. 4.999.999">Rp. 2.000.000 - Rp. 4.999.999</option>
+                                    <option value="Rp.5.000.000 - Rp. 20.000.000">Rp. 5.000.000 - Rp. 20.000.000</option>
+                                    <option value="Lebih dari Rp. 20.000.000">Lebih dari Rp. 20.000.000</option>
+                                    <option value="Tidak Berpenghasilan" selected>Tidak Berpenghasilan</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
-                                <input type="text" id="Ibu_KebutuhanKhusus" name="Ibu_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus Ibu</label>
+                                <select id="Ibu_KebutuhanKhusus" name="Ibu_KebutuhanKhusus" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="Tidak" selected>Tidak</option>
+                                    <option value="netra">Netra</option><option value="rungu">Rungu</option><option value="grahita ringan">Grahita Ringan</option>
+                                    <option value="grahita sedang">Grahita Sedang</option><option value="daksa ringan">Daksa Ringan</option><option value="daksa Sedang">Daksa Sedang</option>
+                                    <option value="laras">Laras</option><option value="wicara">Wicara</option><option value="hyperaktif">Hyperaktif</option>
+                                    <option value="cerdas istimewa">Cerdas Istimewa</option><option value="bakat istimewa">Bakat Istimewa</option><option value="kesulitan belajar">Kesulitan Belajar</option>
+                                    <option value="narkoba">Narkoba</option><option value="indigo">Indigo</option><option value="down syndrome">Down Syndrome</option><option value="autis">Autis</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -346,26 +539,34 @@
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pendidikan Wali</label>
                                 <select id="Wali_Pendidikan" name="Wali_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="S1">S1</option>
+                                    <option value="tidak sekolah">Tidak Sekolah</option>
+                                    <option value="paud">PAUD</option><option value="tk/sederajat">TK/Sederajat</option><option value="sd/sederajat">SD/Sederajat</option><option value="smp/sederajat">SMP/Sederajat</option><option value="sma/sederajat" selected>SMA/Sederajat</option>
+                                    <option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option><option value="lainnya">Lainnya</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Pekerjaan Wali</label>
-                                <input type="text" id="Wali_Pekerjaan" name="Wali_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white">
+                                <select id="Wali_Pekerjaan" name="Wali_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="tidak bekerja">Tidak Bekerja</option><option value="pns/tni/polri">PNS/TNI/Polri</option><option value="karyawan swasta" selected>Karyawan Swasta</option><option value="wiraswasta">Wiraswasta</option><option value="lainnya">Lainnya</option>
+                                </select>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Penghasilan Wali</label>
                                 <select id="Wali_Penghasilan" name="Wali_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
-                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
-                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
-                                    <option value="> 3 Juta">&gt; Rp 3.000.000</option>
+                                    <option value="Kurang dari Rp. 500.000">Kurang dari Rp. 500.000</option>
+                                    <option value="Rp. 2.000.000 - Rp. 4.999.999" selected>Rp. 2.000.000 - Rp. 4.999.999</option>
+                                    <option value="Lebih dari Rp. 20.000.000">Lebih dari Rp. 20.000.000</option>
+                                    <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
-                                <input type="text" id="Wali_KebutuhanKhusus" name="Wali_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus Wali</label>
+                                <select id="Wali_KebutuhanKhusus" name="Wali_KebutuhanKhusus" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="Tidak" selected>Tidak</option>
+                                    <option value="netra">Netra</option><option value="rungu">Rungu</option><option value="grahita ringan">Grahita Ringan</option><option value="autis">Autis</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -425,7 +626,7 @@
                             <div>
                                 <label class="block text-sm font-semibold mb-1">Golongan Darah</label>
                                 <select id="Golongan_Darah" name="Golongan_Darah" class="w-full p-2.5 border rounded-lg">
-                                    <option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option><option value="Belum Tahu">Belum Tahu</option>
+                                    <option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option><option value="Belum Tahu" selected>Belum Tahu</option>
                                 </select>
                             </div>
                             <div>
@@ -495,11 +696,16 @@
                             <input type="file" id="file_foto" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
                         </div>
                     </div>
+
+                    <!-- Kata Penutup Sebelum Submit -->
+                    <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-xs text-amber-900 leading-relaxed mt-6">
+                        <b>Catatan Penting:</b> Terima kasih telah mengisi formulir ini dengan lengkap dan benar. Data yang Bapak/Ibu sampaikan akan digunakan untuk pendataan resmi sekolah dan dijaga kerahasiaannya. Mohon pastikan seluruh informasi sudah benar sebelum menekan tombol Submit.
+                    </div>
                 </div>
 
                 <!-- Navigation Controls -->
                 <div class="flex justify-between items-center pt-6 border-t border-slate-200">
-                    <button type="button" id="prevBtn" class="px-6 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition hidden">
+                    <button type="button" id="prevBtn" class="px-6 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition">
                         <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
                     </button>
                     <button type="button" id="nextBtn" class="ml-auto px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 shadow-md transition">
@@ -520,7 +726,7 @@
                 <i class="fa-solid fa-circle-check"></i>
             </div>
             <h2 class="text-2xl font-extrabold text-slate-800">Pendaftaran Berhasil Terkirim!</h2>
-            <p class="text-slate-600 max-w-md mx-auto">Data pendaftaran calon siswa SD Al-Qur'an An-Najaah Kupang telah tersimpan secara resmi dalam sistem kami.</p>
+            <p class="text-slate-600 max-w-md mx-auto">Data pendaftaran calon siswa SD Al-Qur'an An-Najaah Wahdah Islamiyah Kupang telah tersimpan secara resmi dalam sistem kami.</p>
 
             <div class="bg-slate-50 p-4 rounded-xl border max-w-sm mx-auto">
                 <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Nomor Registrasi Anda</span>
@@ -541,7 +747,7 @@
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 text-xs text-center py-4 border-t border-slate-800">
-        <p>&copy; 2026 SD Al-Qur'an An-Najaah Kupang. All rights reserved.</p>
+        <p>&copy; 2026 SD Al-Qur'an An-Najaah Wahdah Islamiyah Kupang. All rights reserved.</p>
     </footer>
 
     <!-- Script JavaScript External -->
