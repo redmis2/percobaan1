@@ -9,16 +9,33 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initFormLogic() {
+    // Start Form from Welcome Banner
+    document.getElementById('startFormBtn').addEventListener('click', () => {
+        document.getElementById('welcome-banner').classList.add('hidden');
+        document.getElementById('form-container').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Info Saudara Kandung Tooltip
+    document.getElementById('info-saudara').addEventListener('click', () => {
+        Swal.fire({
+            title: 'Informasi Jumlah Saudara Kandung',
+            text: 'Jumlah saudara kandung yang dimiliki peserta didik. Jumlah saudara kandung dihitung tanpa menyertakan peserta didik, dengan rumus jumlah kakak ditambah jumlah adik. Isikan 0 apabila anak tunggal.',
+            icon: 'info',
+            confirmisButtonText: 'Mengerti'
+        });
+    });
+
     // Dynamic Select Toggle Hobi & Cita
     document.getElementById('Hobi_Select').addEventListener('change', (e) => {
         const input = document.getElementById('Hobi_Lainnya');
-        if (e.target.value === 'Lainnya') input.classList.remove('hidden');
+        if (e.target.value === 'lainnya') input.classList.remove('hidden');
         else input.classList.add('hidden');
     });
 
     document.getElementById('Cita_Select').addEventListener('change', (e) => {
         const input = document.getElementById('Cita_Lainnya');
-        if (e.target.value === 'Lainnya') input.classList.remove('hidden');
+        if (e.target.value === 'lainnya') input.classList.remove('hidden');
         else input.classList.add('hidden');
     });
 
@@ -36,17 +53,28 @@ function initFormLogic() {
         else paudDetails.classList.add('hidden');
     });
 
-    // Stepper Navigation Buttons
+    // Stepper Navigation Buttons (Bebas berpindah halaman tanpa blokir validasi saat navigasi bolak-balik)
     document.getElementById('nextBtn').addEventListener('click', () => {
-        if (validateStep(currentStep)) {
+        if (currentStep < totalSteps) {
             currentStep++;
             updateStepperUI();
         }
     });
 
     document.getElementById('prevBtn').addEventListener('click', () => {
-        currentStep--;
-        updateStepperUI();
+        if (currentStep > 1) {
+            currentStep--;
+            updateStepperUI();
+        }
+    });
+
+    // Direct Stepper Indicator Click (Bebas berpindah halaman)
+    document.querySelectorAll('.step-indicator').forEach((ind) => {
+        ind.addEventListener('click', () => {
+            const targetStep = parseInt(ind.getAttribute('data-step'));
+            currentStep = targetStep;
+            updateStepperUI();
+        });
     });
 
     // Form Submission
@@ -66,8 +94,8 @@ function updateStepperUI() {
     const nextBtn = document.getElementById('nextBtn');
     const submitBtn = document.getElementById('submitBtn');
 
-    if (currentStep === 1) prevBtn.classList.add('hidden');
-    else prevBtn.classList.remove('hidden');
+    if (currentStep === 1) prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    else prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
     if (currentStep === totalSteps) {
         nextBtn.classList.add('hidden');
@@ -106,39 +134,45 @@ function updateStepperUI() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function validateStep(step) {
-    const activeStepEl = document.getElementById(`step-${step}`);
-    const requiredInputs = activeStepEl.querySelectorAll('[required]');
-    let isValid = true;
-
-    requiredInputs.forEach((input) => {
+function validateAllFields() {
+    const form = document.getElementById('spmbForm');
+    const requiredInputs = form.querySelectorAll('[required]');
+    
+    for (let input of requiredInputs) {
         if (!input.value.trim()) {
-            isValid = false;
+            // Cari tahu step berapa input ini berada
+            const stepParent = input.closest('.step-content');
+            if (stepParent) {
+                const stepId = stepParent.id; // contoh: "step-1"
+                currentStep = parseInt(stepId.replace('step-', ''));
+                updateStepperUI();
+            }
+            input.focus();
             input.classList.add('border-red-500', 'ring-2', 'ring-red-200');
+            Swal.fire('Form Belum Lengkap', 'Mohon lengkapi seluruh kolom wajib bertanda (*). Periksa kembali isian formulir Anda.', 'warning');
+            return false;
         } else {
             input.classList.remove('border-red-500', 'ring-2', 'ring-red-200');
         }
-    });
-
-    // Custom Validation
-    if (step === 1) {
-        const nik = document.getElementById('NIK').value.trim();
-        const kk = document.getElementById('No_KK').value.trim();
-        if (nik.length !== 16 || isNaN(nik)) {
-            Swal.fire('Validasi Gagal', 'NIK Siswa harus berjumlah 16 digit angka.', 'warning');
-            return false;
-        }
-        if (kk.length !== 16 || isNaN(kk)) {
-            Swal.fire('Validasi Gagal', 'Nomor KK harus berjumlah 16 digit angka.', 'warning');
-            return false;
-        }
     }
 
-    if (!isValid) {
-        Swal.fire('Form Belum Lengkap', 'Silahkan lengkapi semua kolom wajib (*) pada langkah ini.', 'warning');
+    // Validasi khusus NIK & KK
+    const nik = document.getElementById('NIK').value.trim();
+    const kk = document.getElementById('No_KK').value.trim();
+    if (nik.length !== 16 || isNaN(nik)) {
+        currentStep = 1; updateStepperUI();
+        document.getElementById('NIK').focus();
+        Swal.fire('Validasi Gagal', 'NIK Siswa harus berjumlah 16 digit angka.', 'warning');
+        return false;
+    }
+    if (kk.length !== 16 || isNaN(kk)) {
+        currentStep = 1; updateStepperUI();
+        document.getElementById('No_KK').focus();
+        Swal.fire('Validasi Gagal', 'Nomor KK harus berjumlah 16 digit angka.', 'warning');
+        return false;
     }
 
-    return isValid;
+    return true;
 }
 
 // Client-Side Canvas Image Compression
@@ -177,7 +211,7 @@ function compressImage(file, maxWidth = 1200, quality = 0.8) {
 async function handleFormSubmit(e) {
     e.preventDefault();
 
-    if (!validateStep(4)) return;
+    if (!validateAllFields()) return;
 
     Swal.fire({
         title: 'Mengirim Data Pendaftaran...',
@@ -196,8 +230,8 @@ async function handleFormSubmit(e) {
         const fotoBase64 = await compressImage(document.getElementById('file_foto').files[0]);
 
         // Construct Payload Data
-        const hobiVal = document.getElementById('Hobi_Select').value === 'Lainnya' ? document.getElementById('Hobi_Lainnya').value : document.getElementById('Hobi_Select').value;
-        const citaVal = document.getElementById('Cita_Select').value === 'Lainnya' ? document.getElementById('Cita_Lainnya').value : document.getElementById('Cita_Select').value;
+        const hobiVal = document.getElementById('Hobi_Select').value === 'lainnya' ? document.getElementById('Hobi_Lainnya').value : document.getElementById('Hobi_Select').value;
+        const citaVal = document.getElementById('Cita_Select').value === 'lainnya' ? document.getElementById('Cita_Lainnya').value : document.getElementById('Cita_Select').value;
 
         const payload = {
             action: "submitRegistration",
@@ -216,12 +250,12 @@ async function handleFormSubmit(e) {
                 RT_RW: document.getElementById('RT_RW').value,
                 Kelurahan: document.getElementById('Kelurahan').value,
                 Kecamatan: document.getElementById('Kecamatan').value,
-                Jarak_KM: document.getElementById('Jarak_KM').value,
-                Waktu_Tempuh_Menit: document.getElementById('Waktu_Tempuh_Menit').value,
+                Jarak_Rumah_Ke_Sekolah: document.getElementById('Jarak_KM').value + " " + document.getElementById('Satuan_Jarak').value,
+                Waktu_Tempuh_Ke_Sekolah: document.getElementById('Waktu_Tempuh_Menit').value + " Menit",
                 Tempat_Tinggal: document.getElementById('Tempat_Tinggal').value,
                 Transportasi: document.getElementById('Transportasi').value,
                 Anak_Ke: document.getElementById('Anak_Ke').value,
-                Jumlah_Saudara: document.getElementById('Jumlah_Saudara').value
+                Jumlah_Saudara_Kandung: document.getElementById('Jumlah_Saudara').value
             },
             orangTua: {
                 Ayah_Nama: document.getElementById('Ayah_Nama').value,
