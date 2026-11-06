@@ -3,14 +3,548 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Pertamaku</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-        h1 { color: #333; }
-    </style>
+    <title>SPMB Online 2026/2027 - SD Al-Qur'an An-Najaah Kupang</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Halo Dunia!</h1>
-    <p>Ini adalah website pertama saya yang dibuat langsung di GitHub.</p>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-emerald-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3 text-center md:text-left">
+                <div class="w-12 h-12 bg-white text-emerald-700 rounded-full flex items-center justify-center font-bold text-xl shadow">
+                    <i class="fa-solid font-bold fa-book-quran"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg md:text-xl leading-tight">SD AL-QUR'AN AN-NAJAAH KUPANG</h1>
+                    <p class="text-xs text-emerald-100">Sistem Penerimaan Murid Baru (SPMB) Online T.A. 2026/2027</p>
+                </div>
+            </div>
+            <div class="text-xs bg-emerald-800 px-3 py-2 rounded-lg text-emerald-100 flex flex-col gap-1 border border-emerald-600">
+                <span class="font-semibold text-white"><i class="fa-solid fa-headset mr-1">="</i> Layanan Informasi:</span>
+                <span>Fachry: <a href="https://wa.me/6282235108330" target="_blank" class="underline hover:text-white">082235108330</a> | Ustzh. Failah: <a href="https://wa.me/6282261420387" target="_blank" class="underline hover:text-white">082261420387</a></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto w-full p-4 my-6 flex-grow">
+        
+        <!-- Form Wrapper -->
+        <div id="form-container" class="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+            
+            <!-- Stepper Progress Bar -->
+            <div class="bg-slate-100 p-4 md:p-6 border-b border-slate-200">
+                <div class="flex justify-between items-center relative max-w-2xl mx-auto">
+                    <div class="absolute top-1/2 left-0 right-0 h-1 bg-slate-300 -translate-y-1/2 z-0"></div>
+                    <div id="progress-line" class="absolute top-1/2 left-0 h-1 bg-emerald-600 -translate-y-1/2 z-0 transition-all duration-300" style="width: 0%;"></div>
+
+                    <!-- Step 1 Indicator -->
+                    <div class="step-indicator z-10 flex flex-col items-center" data-step="1">
+                        <div class="step-circle w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold shadow transition-all duration-300">1</div>
+                        <span class="text-xs font-semibold mt-2 text-emerald-700">Data Siswa</span>
+                    </div>
+
+                    <!-- Step 2 Indicator -->
+                    <div class="step-indicator z-10 flex flex-col items-center" data-step="2">
+                        <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">2</div>
+                        <span class="text-xs font-semibold mt-2 text-slate-500">Orang Tua / Wali</span>
+                    </div>
+
+                    <!-- Step 3 Indicator -->
+                    <div class="step-indicator z-10 flex flex-col items-center" data-step="3">
+                        <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">3</div>
+                        <span class="text-xs font-semibold mt-2 text-slate-500">Pendidikan & Kesehatan</span>
+                    </div>
+
+                    <!-- Step 4 Indicator -->
+                    <div class="step-indicator z-10 flex flex-col items-center" data-step="4">
+                        <div class="step-circle w-10 h-10 rounded-full bg-slate-300 text-slate-600 flex items-center justify-center font-bold shadow transition-all duration-300">4</div>
+                        <span class="text-xs font-semibold mt-2 text-slate-500">Dokumen</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="spmbForm" class="p-6 md:p-8 space-y-6" novalidate>
+                
+                <!-- STEP 1: DATA SISWA -->
+                <div id="step-1" class="step-content space-y-4">
+                    <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-user-graduate mr-2"></i>Data Pribadi Calon Siswa</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                            <input type="text" id="Nama_Lengkap" name="Nama_Lengkap" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Jenis Kelamin <span class="text-red-500">*</span></label>
+                            <div class="flex gap-4 pt-2">
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="Jenis_Kelamin" value="Laki-laki" class="text-emerald-600 focus:ring-emerald-500" checked> Laki-laki</label>
+                                <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="Jenis_Kelamin" value="Perempuan" class="text-emerald-600 focus:ring-emerald-500"> Perempuan</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">NIK Siswa (16 Digit) <span class="text-red-500">*</span></label>
+                            <input type="text" id="NIK" name="NIK" maxlength="16" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">No. Kartu Keluarga (16 Digit) <span class="text-red-500">*</span></label>
+                            <input type="text" id="No_KK" name="No_KK" maxlength="16" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Tempat Lahir <span class="text-red-500">*</span></label>
+                            <input type="text" id="Tempat_Lahir" name="Tempat_Lahir" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Tanggal Lahir <span class="text-red-500">*</span></label>
+                            <input type="date" id="Tanggal_Lahir" name="Tanggal_Lahir" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">No. Reg Akta Kelahiran <span class="text-red-500">*</span></label>
+                            <input type="text" id="No_Reg_Akta" name="No_Reg_Akta" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Hobi</label>
+                            <select id="Hobi_Select" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                                <option value="Membaca">Membaca</option>
+                                <option value="Olahraga">Olahraga</option>
+                                <option value="Menggambar">Menggambar</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <input type="text" id="Hobi_Lainnya" placeholder="Sebutkan Hobi" class="w-full p-2.5 border rounded-lg mt-2 hidden">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Cita-Cita</label>
+                            <select id="Cita_Select" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                                <option value="Dokter">Dokter</option>
+                                <option value="Guru/Ustadz">Guru / Ustadz</option>
+                                <option value="TNI/Polri">TNI / Polri</option>
+                                <option value="Pengusaha">Pengusaha</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <input type="text" id="Cita_Lainnya" placeholder="Sebutkan Cita-cita" class="w-full p-2.5 border rounded-lg mt-2 hidden">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Berkebutuhan Khusus? <span class="text-red-500">*</span></label>
+                            <select id="Berkebutuhan_Khusus" name="Berkebutuhan_Khusus" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                                <option value="Tidak">Tidak</option>
+                                <option value="Ya">Ya</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <h3 class="text-md font-bold text-emerald-700 mt-6 pt-4 border-t">Alamat & Domisili</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Alamat Jalan <span class="text-red-500">*</span></label>
+                            <input type="text" id="Alamat_Jalan" name="Alamat_Jalan" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">RT / RW <span class="text-red-500">*</span></label>
+                            <input type="text" id="RT_RW" name="RT_RW" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="001/002" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Kelurahan <span class="text-red-500">*</span></label>
+                            <input type="text" id="Kelurahan" name="Kelurahan" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Kecamatan <span class="text-red-500">*</span></label>
+                            <input type="text" id="Kecamatan" name="Kecamatan" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Jarak (KM) <span class="text-red-500">*</span></label>
+                            <input type="number" step="0.1" id="Jarak_KM" name="Jarak_KM" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Waktu Tempuh (Menit) <span class="text-red-500">*</span></label>
+                            <input type="number" id="Waktu_Tempuh_Menit" name="Waktu_Tempuh_Menit" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Tempat Tinggal <span class="text-red-500">*</span></label>
+                            <select id="Tempat_Tinggal" name="Tempat_Tinggal" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500">
+                                <option value="Bersama Orang Tua">Bersama Orang Tua</option>
+                                <option value="Wali">Wali</option>
+                                <option value="Kos/Kontrak">Kos/Kontrak</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Transportasi <span class="text-red-500">*</span></label>
+                            <input type="text" id="Transportasi" name="Transportasi" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" placeholder="Sepeda Motor / Jalan Feet" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Anak Ke- <span class="text-red-500">*</span></label>
+                            <input type="number" id="Anak_Ke" name="Anak_Ke" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Jumlah Kandung <span class="text-red-500">*</span></label>
+                            <input type="number" id="Jumlah_Saudara" name="Jumlah_Saudara" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-emerald-500" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: ORANG TUA / WALI -->
+                <div id="step-2" class="step-content space-y-6 hidden">
+                    
+                    <!-- DATA AYAH -->
+                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-4">
+                        <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-user-tie mr-2"></i>Data Ayah Kandung</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Nama Ayah <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ayah_Nama" name="Ayah_Nama" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">NIK Ayah (16 Digit) <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ayah_NIK" name="Ayah_NIK" maxlength="16" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">No. WA Ayah <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ayah_WA" name="Ayah_WA" placeholder="08xxxxxxxxx" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Tahun Lahir <span class="text-red-500">*</span></label>
+                                <input type="number" id="Ayah_ThnLahir" name="Ayah_ThnLahir" placeholder="1980" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pendidikan</label>
+                                <select id="Ayah_Pendidikan" name="Ayah_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pekerjaan</label>
+                                <input type="text" id="Ayah_Pekerjaan" name="Ayah_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Penghasilan Bulanan</label>
+                                <select id="Ayah_Penghasilan" name="Ayah_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
+                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
+                                    <option value="3 - 5 Juta">Rp 3.000.000 - Rp 5.000.000</option>
+                                    <option value="> 5 Juta">&gt; Rp 5.000.000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
+                                <input type="text" id="Ayah_KebutuhanKhusus" name="Ayah_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DATA IBU -->
+                    <div class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-4">
+                        <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-user-dress mr-2"></i>Data Ibu Kandung</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Nama Ibu <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ibu_Nama" name="Ibu_Nama" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">NIK Ibu (16 Digit) <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ibu_NIK" name="Ibu_NIK" maxlength="16" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">No. WA Ibu <span class="text-red-500">*</span></label>
+                                <input type="text" id="Ibu_WA" name="Ibu_WA" placeholder="08xxxxxxxxx" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Tahun Lahir <span class="text-red-500">*</span></label>
+                                <input type="number" id="Ibu_ThnLahir" name="Ibu_ThnLahir" placeholder="1985" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pendidikan</label>
+                                <select id="Ibu_Pendidikan" name="Ibu_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="D3">D3</option><option value="S1">S1</option><option value="S2">S2</option><option value="S3">S3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pekerjaan</label>
+                                <input type="text" id="Ibu_Pekerjaan" name="Ibu_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Penghasilan Bulanan</label>
+                                <select id="Ibu_Penghasilan" name="Ibu_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="Tidak Berpenghasilan">Tidak Berpenghasilan / Ibu Rumah Tangga</option>
+                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
+                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
+                                    <option value="> 3 Juta">&gt; Rp 3.000.000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
+                                <input type="text" id="Ibu_KebutuhanKhusus" name="Ibu_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOGGLE WALI -->
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="Has_Wali" class="w-5 h-5 text-emerald-600 rounded focus:ring-emerald-500">
+                            <span class="font-bold text-emerald-900">Siswa Memiliki Wali (Selain Orang Tua Kandung)</span>
+                        </label>
+                    </div>
+
+                    <!-- DATA WALI (HIDDEN BY DEFAULT) -->
+                    <div id="wali-card" class="p-4 border border-slate-200 rounded-xl bg-slate-50 space-y-4 hidden">
+                        <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-user-shield mr-2"></i>Data Wali Siswa</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Nama Wali</label>
+                                <input type="text" id="Wali_Nama" name="Wali_Nama" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">NIK Wali</label>
+                                <input type="text" id="Wali_NIK" name="Wali_NIK" maxlength="16" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">No. WA Wali</label>
+                                <input type="text" id="Wali_WA" name="Wali_WA" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Tahun Lahir Wali</label>
+                                <input type="number" id="Wali_ThnLahir" name="Wali_ThnLahir" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pendidikan Wali</label>
+                                <select id="Wali_Pendidikan" name="Wali_Pendidikan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="SD">SD</option><option value="SMP">SMP</option><option value="SMA">SMA/SMK</option><option value="S1">S1</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Pekerjaan Wali</label>
+                                <input type="text" id="Wali_Pekerjaan" name="Wali_Pekerjaan" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Penghasilan Wali</label>
+                                <select id="Wali_Penghasilan" name="Wali_Penghasilan" class="w-full p-2.5 border rounded-lg bg-white">
+                                    <option value="< 1 Juta">&lt; Rp 1.000.000</option>
+                                    <option value="1 - 3 Juta">Rp 1.000.000 - Rp 3.000.000</option>
+                                    <option value="> 3 Juta">&gt; Rp 3.000.000</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Kebutuhan Khusus</label>
+                                <input type="text" id="Wali_KebutuhanKhusus" name="Wali_KebutuhanKhusus" value="Tidak Ada" class="w-full p-2.5 border rounded-lg bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- STEP 3: PENDIDIKAN & KESEHATAN -->
+                <div id="step-3" class="step-content space-y-6 hidden">
+                    
+                    <!-- DATA PAUD / TK -->
+                    <div class="p-4 border border-slate-200 rounded-xl space-y-4">
+                        <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-school mr-2"></i>Riwayat Pendidikan PAUD / TK</h2>
+                        <div>
+                            <label class="block text-sm font-semibold mb-1">Apakah Pernah PAUD / TK? <span class="text-red-500">*</span></label>
+                            <select id="Ada_PAUD" name="Ada_PAUD" class="w-full p-2.5 border rounded-lg">
+                                <option value="Ya">Ya</option>
+                                <option value="Tidak">Tidak</option>
+                            </select>
+                        </div>
+                        
+                        <div id="paud-details" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Nama TK / PAUD</label>
+                                    <input type="text" id="PAUD_NamaSekolah" name="PAUD_NamaSekolah" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Tahun Lulus</label>
+                                    <input type="number" id="PAUD_ThnLulus" name="PAUD_ThnLulus" placeholder="2026" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Nama Kepala Sekolah</label>
+                                    <input type="text" id="PAUD_KepalaSekolah" name="PAUD_KepalaSekolah" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Kecamatan TK</label>
+                                    <input type="text" id="PAUD_Kecamatan" name="PAUD_Kecamatan" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Kabupaten / Kota TK</label>
+                                    <input type="text" id="PAUD_KabKota" name="PAUD_KabKota" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold mb-1">Provinsi TK</label>
+                                    <input type="text" id="PAUD_Provinsi" name="PAUD_Provinsi" class="w-full p-2.5 border rounded-lg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DATA KESEHATAN -->
+                    <div class="p-4 border border-slate-200 rounded-xl space-y-4">
+                        <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-heart-pulse mr-2"></i>Data Fisik & Kesehatan Siswa</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Golongan Darah</label>
+                                <select id="Golongan_Darah" name="Golongan_Darah" class="w-full p-2.5 border rounded-lg">
+                                    <option value="A">A</option><option value="B">B</option><option value="AB">AB</option><option value="O">O</option><option value="Belum Tahu">Belum Tahu</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Tinggi Badan (cm) <span class="text-red-500">*</span></label>
+                                <input type="number" id="Tinggi_Badan_CM" name="Tinggi_Badan_CM" class="w-full p-2.5 border rounded-lg" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Berat Badan (kg) <span class="text-red-500">*</span></label>
+                                <input type="number" id="Berat_Badan_KG" name="Berat_Badan_KG" class="w-full p-2.5 border rounded-lg" required>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Riwayat Penyakit Berat</label>
+                                <input type="text" id="Riwayat_Penyakit" name="Riwayat_Penyakit" placeholder="Kosongkan jika tidak ada" class="w-full p-2.5 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Obat Rutin Dikonsumsi</label>
+                                <input type="text" id="Obat_Dikonsumsi" name="Obat_Dikonsumsi" placeholder="Kosongkan jika tidak ada" class="w-full p-2.5 border rounded-lg">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Alergi Makanan / Obat</label>
+                                <input type="text" id="Alergi" name="Alergi" placeholder="Kosongkan jika tidak ada" class="w-full p-2.5 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold mb-1">Nama & Kontak Dokter Langganan</label>
+                                <input type="text" id="Dokter_Nama_NoTelp" name="Dokter_Nama_NoTelp" placeholder="Kosongkan jika tidak ada" class="w-full p-2.5 border rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- STEP 4: UNGGAH DOKUMEN -->
+                <div id="step-4" class="step-content space-y-4 hidden">
+                    <h2 class="text-lg font-bold text-emerald-800 border-b pb-2"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Unggah Berkas Persyaratan (Gambar/Foto)</h2>
+                    <p class="text-xs text-slate-500 bg-amber-50 p-3 rounded-lg border border-amber-200"><i class="fa-solid fa-circle-info mr-1 text-amber-600"></i> Berkas otomatis dikompresi di browser (Max 1200px format JPEG) agar proses submit cepat & ringan.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                        <!-- Akta -->
+                        <div class="border-2 border-dashed border-slate-300 p-4 rounded-xl text-center hover:border-emerald-500 transition">
+                            <i class="fa-solid fa-file-invoice text-3xl text-emerald-600 mb-2"></i>
+                            <label class="block text-sm font-bold mb-1">Akta Kelahiran <span class="text-red-500">*</span></label>
+                            <input type="file" id="file_akta" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
+                        </div>
+                        
+                        <!-- KK -->
+                        <div class="border-2 border-dashed border-slate-300 p-4 rounded-xl text-center hover:border-emerald-500 transition">
+                            <i class="fa-solid fa-users text-3xl text-emerald-600 mb-2"></i>
+                            <label class="block text-sm font-bold mb-1">Kartu Keluarga (KK) <span class="text-red-500">*</span></label>
+                            <input type="file" id="file_kk" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
+                        </div>
+
+                        <!-- Ijazah/SKL -->
+                        <div class="border-2 border-dashed border-slate-300 p-4 rounded-xl text-center hover:border-emerald-500 transition">
+                            <i class="fa-solid fa-certificate text-3xl text-emerald-600 mb-2"></i>
+                            <label class="block text-sm font-bold mb-1">Ijazah / SKL TK</label>
+                            <input type="file" id="file_ijazah" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+                        </div>
+
+                        <!-- Foto -->
+                        <div class="border-2 border-dashed border-slate-300 p-4 rounded-xl text-center hover:border-emerald-500 transition">
+                            <i class="fa-solid fa-id-badge text-3xl text-emerald-600 mb-2"></i>
+                            <label class="block text-sm font-bold mb-1">Pas Foto 2x3 / 3x4 <span class="text-red-500">*</span></label>
+                            <input type="file" id="file_foto" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex justify-between items-center pt-6 border-t border-slate-200">
+                    <button type="button" id="prevBtn" class="px-6 py-2.5 bg-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-300 transition hidden">
+                        <i class="fa-solid fa-arrow-left mr-2"></i>Kembali
+                    </button>
+                    <button type="button" id="nextBtn" class="ml-auto px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 shadow-md transition">
+                        Lanjut<i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                    <button type="submit" id="submitBtn" class="ml-auto px-8 py-2.5 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow-lg transition hidden">
+                        Kirim Pendaftaran<i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- SUCCESS CONTAINER (HIDDEN UNTIL SUBMIT SUCCESS) -->
+        <div id="success-container" class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 text-center space-y-6 hidden">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2 class="text-2xl font-extrabold text-slate-800">Pendaftaran Berhasil Terkirim!</h2>
+            <p class="text-slate-600 max-w-md mx-auto">Data pendaftaran calon siswa SD Al-Qur'an An-Najaah Kupang telah tersimpan secara resmi dalam sistem kami.</p>
+
+            <div class="bg-slate-50 p-4 rounded-xl border max-w-sm mx-auto">
+                <span class="text-xs text-slate-500 uppercase font-bold tracking-wider">Nomor Registrasi Anda</span>
+                <div id="res-no-reg" class="text-2xl font-black text-emerald-700 mt-1">REG-SDQU-2026-XXX</div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+                <a id="downloadPdfBtn" href="#" target="_blank" class="px-6 py-3 bg-emerald-600 text-white font-bold rounded-xl shadow hover:bg-emerald-700 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf text-xl"></i> Unduh Kartu Pendaftaran (PDF)
+                </a>
+                <a href="https://chat.whatsapp.com/DXN3Igl80VPJk4AVVXCddh?mode=hqrt1" target="_blank" class="px-6 py-3 bg-green-500 text-white font-bold rounded-xl shadow hover:bg-green-600 transition flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Join Group WA SPMB
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs text-center py-4 border-t border-slate-800">
+        <p>&copy; 2026 SD Al-Qur'an An-Najaah Kupang. All rights reserved.</p>
+    </footer>
+
+    <!-- Script JavaScript External -->
+    <script src="script.js"></script>
 </body>
 </html>
