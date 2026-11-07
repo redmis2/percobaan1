@@ -1,5 +1,5 @@
 // CONFIGURATION: Ganti Web App URL di bawah dengan URL Deploy Apps Script Anda
-const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyHvIkLalQxk7fLkX2a7-xXU7_SCJqZao7IPhMMEfjuoJ238RXtYEeRGvVhlS-ckMA/exec';
+const GAS_ENDPOINT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
 
 let currentStep = 1;
 const totalSteps = 4;
@@ -22,7 +22,7 @@ function initFormLogic() {
             title: 'Informasi Jumlah Saudara Kandung',
             text: 'Jumlah saudara kandung yang dimiliki peserta didik. Jumlah saudara kandung dihitung tanpa menyertakan peserta didik, dengan rumus jumlah kakak ditambah jumlah adik. Isikan 0 apabila anak tunggal.',
             icon: 'info',
-            confirmisButtonText: 'Mengerti'
+            confirmButtonText: 'Mengerti'
         });
     });
 
@@ -140,10 +140,9 @@ function validateAllFields() {
     
     for (let input of requiredInputs) {
         if (!input.value.trim()) {
-            // Cari tahu step berapa input ini berada
             const stepParent = input.closest('.step-content');
             if (stepParent) {
-                const stepId = stepParent.id; // contoh: "step-1"
+                const stepId = stepParent.id;
                 currentStep = parseInt(stepId.replace('step-', ''));
                 updateStepperUI();
             }
@@ -223,13 +222,11 @@ async function handleFormSubmit(e) {
     });
 
     try {
-        // Compress Files to Base64
         const aktaBase64 = await compressImage(document.getElementById('file_akta').files[0]);
         const kkBase64 = await compressImage(document.getElementById('file_kk').files[0]);
         const ijazahBase64 = await compressImage(document.getElementById('file_ijazah').files[0]);
         const fotoBase64 = await compressImage(document.getElementById('file_foto').files[0]);
 
-        // Construct Payload Data
         const hobiVal = document.getElementById('Hobi_Select').value === 'lainnya' ? document.getElementById('Hobi_Lainnya').value : document.getElementById('Hobi_Select').value;
         const citaVal = document.getElementById('Cita_Select').value === 'lainnya' ? document.getElementById('Cita_Lainnya').value : document.getElementById('Cita_Select').value;
 
@@ -308,7 +305,6 @@ async function handleFormSubmit(e) {
             }
         };
 
-        // Fetch to GAS Backend API
         const response = await fetch(GAS_ENDPOINT_URL, {
             method: 'POST',
             redirect: 'follow',
