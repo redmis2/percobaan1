@@ -4,7 +4,6 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Custom Scrollbar Visual */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -19,7 +18,6 @@ body {
     background: #047857;
 }
 
-/* Animation Stepper Transition */
 .step-content {
     animation: fadeIn 0.3s ease-in-out forwards;
 }
@@ -35,7 +33,6 @@ body {
     }
 }
 
-/* Skeleton Loading Visual */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -47,7 +44,6 @@ body {
     100% { background-position: -200% 0; }
 }
 
-/* Media Print Rules */
 @media print {
     header, footer, #form-container, .step-indicator, button {
         display: none !important;
