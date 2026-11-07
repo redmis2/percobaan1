@@ -1,5 +1,5 @@
 // CONFIGURATION: Ganti Web App URL di bawah dengan URL Deploy Apps Script Anda
-const GAS_ENDPOINT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbyHvIkLalQxk7fLkX2a7-xXU7_SCJqZao7IPhMMEfjuoJ238RXtYEeRGvVhlS-ckMA/exec';
 
 let currentStep = 1;
 const totalSteps = 4;
